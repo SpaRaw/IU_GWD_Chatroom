@@ -11,3 +11,22 @@ services:
       - "8080:80"
     volumes:
       - ./app/src:/var/www/html
+
+  sql:
+    container_name: MySql_Service
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: user
+      MYSQL_ROOT_PASSWORD: zitrone
+      MYSQL_PASSWORD: zitrone
+    volumes:
+      - ./database/user.sql:/docker-entrypoint-initdb.d/user.sql
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8088:80
+    environment:
+      - PMA_ARBITRARY=1
