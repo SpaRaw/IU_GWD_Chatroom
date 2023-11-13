@@ -31,18 +31,24 @@
         }
     ?>
     <h1>Registrierung</h1>
-    <div>
+    <div class="reg">
         <form action="/registrierung.php" method="post">
             <input type="text" placeholder="Nutzername" name="user" id="user">
-            <div>
-                <input type="password" placeholder="Passwort" name="pw" id="pw" on>
-                <div class="statusRow">
-                    <div class="statusMSG err">8 Zeichen</div>
-                    <div class="statusMSG err">Großbuchstaben</div>
-                    <div class="statusMSG err">Sonderzeichen</div>
+            <div class="pwInput">
+                <div class="pw">
+                    <div class="pw1">
+                        <input type="password" placeholder="Passwort" name="pw" id="pw" on>
+                        <div class="statusRow">
+                            <div class="statusMSG err">8 Zeichen</div>
+                            <div class="statusMSG err">Großbuchstaben</div>
+                            <div class="statusMSG err">Sonderzeichen</div>
+                        </div>
+                    </div>
+                    <div class="pw2">
+                        <input type="password" placeholder="Passwort wiederholen" id="pw2">
+                    </div>
                 </div>
             </div>
-            <input type="password" placeholder="Passwort wiederholen" id="pw2">
             <input type="submit" value="Registrieren" disabled id="reg">
         </form>
     </div>

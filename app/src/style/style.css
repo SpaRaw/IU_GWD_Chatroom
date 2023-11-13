@@ -1,7 +1,116 @@
+:root{
+    --bgc-dark: #000;
+    --bgc-medium: #222;
+    --bgc-light: #444;
+
+    --font-color: #fff;
+    --accent-color: #E0BBE4;
+    --accent-error: #FF3131;
+
+    --margin-after-normal: 2rem;
+    --margin-after-min: 1rem;
+}
+*{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-family: "SCI", Consolas, sans-serif;
+}
+
+@font-face{
+    font-family: SCIBold;
+    src:local("./font/static/Orbitron-SemiBold.ttf");
+    font-weight: 600;
+}
+@font-face{
+    font-family: SCI;
+    src:local("./fonts/static/Orbitron-Regular.ttf");
+    font-weight: 400;
+}
+h1,h2,h3{
+    font-family: "SCIBold", Consolas, sans-serif;
+}
+h1{
+    font-size: 28px;
+    margin-bottom: var(--margin-after-normal);
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--accent-color)
+}
+h2{
+    font-size: 24px;
+}
+h3{
+    font-size: 20px;
+}
+body{
+    background-color: var(--bgc-dark);
+    color: var(--font-color);
+}
+.contentLimiter{
+    background-color: var(--bgc-medium);
+    margin-inline: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
 .hidden{
     display:none;
 }
 
 .err{
-    color: red;
+    color: var(--accent-error);
+}
+
+input{
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 0.5rem;
+    margin: 0.5rem;
+    background-color: var(--bgc-light);
+    border-top: none;
+    border-left: 1px solid var(--accent-color);
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, var(--accent-color) 0%, rgba(34,34,34,1) 66%);
+    border-image-slice: 1;
+}
+input[type=text], input[type=password]{
+
+    background-color: var(--bgc-light);
+}
+input:active, input[type=submit]:hover{
+    background-color: var(--accent-color);
+    color: var(--bgc-medium);
+    border-color: var(--bgc-medium);
+}
+
+form{
+    margin-bottom: 2rem;
+}
+
+a{
+    color: var(--accent-color);
+    padding: 0.5rem;
+}
+
+a:hover, a:active{
+    -webkit-box-shadow:0px 0px 6px 0px var(--accent-color);
+    -moz-box-shadow: 0px 0px 6px 0px var(--accent-color);
+    box-shadow: 0px 0px 6px 0px var(--accent-color);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.reg > *{
+    margin-bottom: var(--margin-after-min);
+}
+
+.pw{
+    display:flex;
+}
+
+.statusRow{
+    margin-left:0.5rem;
+    padding-inline: 0.5rem;
+    border: 2px solid transparent;
 }

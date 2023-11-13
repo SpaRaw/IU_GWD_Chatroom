@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: sql
--- Erstellungszeit: 06. Nov 2023 um 12:55
--- Server-Version: 8.2.0
--- PHP-Version: 8.2.12
+-- Generation Time: Nov 13, 2023 at 01:54 PM
+-- Server version: 8.2.0
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Datenbank: `user`
+-- Database: `user`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellenstruktur für Tabelle `user`
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `ID` int NOT NULL,
+  `post_id` int NOT NULL,
+  `content` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`ID`, `post_id`, `content`) VALUES
+(1, 1, 'Hallo ich bin ein Post');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -34,32 +53,46 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Daten für Tabelle `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`ID`, `user_name`, `passwort`) VALUES
 (1, 'admin', 'admin'),
-(2, '[value-1]', '[value-2]');
+(2, '[value-1]', '[value-2]'),
+(3, 'provator', '5c163ce3450271de3aa5cd73fcc0e88ab9f7ad43f299b6d9a8dd37afb69de67d'),
+(4, 'alapen', '5c163ce3450271de3aa5cd73fcc0e88ab9f7ad43f299b6d9a8dd37afb69de67d');
 
 --
--- Indizes der exportierten Tabellen
+-- Indexes for dumped tables
 --
 
 --
--- Indizes für die Tabelle `user`
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`ID`);
 
 --
--- AUTO_INCREMENT für exportierte Tabellen
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT für Tabelle `user`
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
