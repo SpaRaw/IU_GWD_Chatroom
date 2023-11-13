@@ -1,20 +1,57 @@
-<html>
+<?php
+    session_start();
+?>
+<!doctype html>
+<html lang="de">
 <head>
-<title> Hallo </title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log-in</title>
+    <link rel="stylesheet" href="./style/style.css">
+</head>
 <body>
 <?php
-$servername = "sql";
-$username = "root";
-$password = "zitrone";
+    if(isset($_POST["pw"], $_POST["user"])){
+        $pw = hash('sha256', $_POST["pw"]);
+        $user = $_POST["user"];
+        $servername = "sql";
+        $username = "root";
+        $password = "zitrone";
+        $sql = "SELECT * FROM user WHERE user_name='".$user."'";
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=user", $username, $password);
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll()[0];
+            var_dump($result);
+            if($result["passwort"]==$pw){
+                $_SESSION["aktiveUser"][]=$user;
+                $_SESSION["UID"] = $result["ID"];
+                echo("<script>location.href='/test.php';</script>");
+            }else{
+                echo("<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>");
+            }
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
+    }
 
-try {
-    $conn = new PDO("mysql:host=$servername;dbname=user", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Connected successfully";
-} catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage();
-}
 ?>
+
+<div class="contentLimiter">
+    <h1>Log-IN</h1>
+    <div>
+        <form action="" method="post">
+            <input type="text" placeholder="Nutzername" name="user">
+            <input type="password" placeholder="Passwort" name="pw">
+            <input type="submit" value="Einloggen">
+        </form>
+    </div>
+    <a href="registrierung.php">Registrieren</a>
+</div>
 </body>
 </html>
