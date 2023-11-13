@@ -43,7 +43,7 @@
 ?>
 
 <div class="contentLimiter">
-    <h1>Log-IN</h1>
+    <h1>Log-In</h1>
     <div>
         <form action="" method="post">
             <input type="text" placeholder="Nutzername" name="user">
