@@ -39,6 +39,8 @@ CREATE TABLE `posts` (
 
 INSERT INTO `posts` (`ID`, `post_id`, `content`) VALUES
 (1, 1, 'Hallo ich bin ein Post');
+(2, 3, 'Hallo');
+(3, 4, 'Hallo Welt');
 
 -- --------------------------------------------------------
 
