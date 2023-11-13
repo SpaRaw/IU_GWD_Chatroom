@@ -38,6 +38,7 @@ h1{
     border-bottom: 1px solid transparent;
     border-image: linear-gradient(90deg, var(--accent-color) 0%, rgba(34,34,34,1) 66%);
     border-image-slice: 1;
+    width: 50%;
 }
 h2{
     font-size: 24px;
@@ -116,4 +117,18 @@ a:hover, a:active{
     margin-left:0.5rem;
     padding-inline: 0.5rem;
     border: 2px solid transparent;
+}
+
+#icon{
+    width: auto;
+    height: 2rem;
+}
+
+header{
+    display: flex;
+    align-items: center;
+}
+img{
+    margin-right: 1rem;
+    color: #FF3131;
 }

@@ -30,7 +30,10 @@
             }
         }
     ?>
-    <h1>Registrierung</h1>
+    <header>
+        <img src="icon/icon.svg">
+        <h1>Registrierung</h1>
+    </header>
     <div class="reg">
         <form action="/registrierung.php" method="post">
             <input type="text" placeholder="Nutzername" name="user" id="user">
