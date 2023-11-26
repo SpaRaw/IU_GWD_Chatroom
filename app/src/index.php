@@ -42,7 +42,6 @@
     }
 
 ?>
-<h1>Hallo</h1>
 <div class="contentLimiter">
     <header>
         <img src="icon/icon.svg">
