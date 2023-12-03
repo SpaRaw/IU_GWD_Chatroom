@@ -1,0 +1,116 @@
+Index: app/src/index.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n    session_start();\r\n?>\r\n<!doctype html>\r\n<html lang=\"de\">\r\n<head>\r\n    <meta charset=\"UTF-8\">\r\n    <meta name=\"viewport\"\r\n          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\r\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\r\n    <title>CatRoom | Log-in</title>\r\n    <link rel=\"stylesheet\" href=\"./style/style.css\">\r\n    <link rel=\"icon\" href=\"./icon/icon.svg\">\r\n</head>\r\n<body>\r\n<?php\r\n    if(isset($_POST[\"pw\"], $_POST[\"user\"])){\r\n        $pw = hash('sha256', $_POST[\"pw\"]);\r\n        $user = $_POST[\"user\"];\r\n        $servername = \"sql\";\r\n        $username = \"root\";\r\n        $password = \"zitrone\";\r\n        $sql = \"SELECT * FROM user WHERE user_name='\".$user.\"'\";\r\n        try {\r\n            $conn = new PDO(\"mysql:host=$servername;dbname=user\", $username, $password);\r\n            // set the PDO error mode to exception\r\n            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\r\n            $stmt = $conn->prepare($sql);\r\n            $stmt->execute();\r\n            $result = $stmt->fetchAll()[0];\r\n            var_dump($result);\r\n            if($result[\"passwort\"]==$pw){\r\n                $_SESSION[\"aktiveUser\"][]=$user;\r\n                $_SESSION[\"UID\"] = $result[\"ID\"];\r\n                echo(\"<script>location.href='/test.php';</script>\");\r\n            }else{\r\n                echo(\"<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>\");\r\n            }\r\n        } catch(PDOException $e) {\r\n            echo \"Connection failed: \" . $e->getMessage();\r\n        }\r\n    }\r\n\r\n?>\r\n<div class=\"contentLimiter\">\r\n    <header>\r\n        <img src=\"icon/icon.svg\">\r\n        <h1>Log-In </h1>\r\n    </header>\r\n    <div>\r\n        <form action=\"\" method=\"post\">\r\n            <input type=\"text\" placeholder=\"Nutzername\" name=\"user\">\r\n            <input type=\"password\" placeholder=\"Passwort\" name=\"pw\">\r\n            <input type=\"submit\" value=\"Einloggen\">\r\n        </form>\r\n    </div>\r\n    <a href=\"registrierung.php\">Registrieren</a>\r\n</div>\r\n</body>\r\n</html>\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/index.php b/app/src/index.php
+--- a/app/src/index.php	(revision 024d104780ae2aa59c44c34adb38abfad3ca1249)
++++ b/app/src/index.php	(date 1701613801127)
+@@ -32,7 +32,7 @@
+             if($result["passwort"]==$pw){
+                 $_SESSION["aktiveUser"][]=$user;
+                 $_SESSION["UID"] = $result["ID"];
+-                echo("<script>location.href='/test.php';</script>");
++                echo("<script>location.href='/chat.php';</script>");
+             }else{
+                 echo("<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>");
+             }
+Index: app/src/classes/post.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/classes/post.php b/app/src/classes/post.php
+new file mode 100644
+--- /dev/null	(date 1701614911573)
++++ b/app/src/classes/post.php	(date 1701614911573)
+@@ -0,0 +1,23 @@
++<?php
++
++class post
++{
++    public $postContent;
++    public $postID;
++
++    function __construct($content, $id){
++        $this -> postContent = $content;
++        $this -> postID = $id;
++    }
++
++    function render(){
++        $content = "
++            <div>
++            
++            </div>
++        ";
++
++
++        echo($content);
++    }
++}
+\ No newline at end of file
+Index: app/src/chat.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/chat.php b/app/src/chat.php
+new file mode 100644
+--- /dev/null	(date 1701614911557)
++++ b/app/src/chat.php	(date 1701614911557)
+@@ -0,0 +1,52 @@
++<?php
++    session_start();
++    include "./classes/post.php";
++?>
++<!doctype html>
++<html lang="de">
++<head>
++    <meta charset="UTF-8">
++    <meta name="viewport"
++          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
++    <meta http-equiv="X-UA-Compatible" content="ie=edge">
++    <title>CatRoom</title>
++    <link rel="stylesheet" href="./style/style.css">
++    <link rel="icon" href="./icon/icon.svg">
++</head>
++<body>
++<?php
++if(isset($_POST["pw"], $_POST["user"])){
++    $pw = hash('sha256', $_POST["pw"]);
++    $user = $_POST["user"];
++    $servername = "sql";
++    $username = "root";
++    $password = "zitrone";
++    $sql = "SELECT * FROM user WHERE user_name='".$user."'";
++    try {
++        $conn = new PDO("mysql:host=$servername;dbname=user", $username, $password);
++        // set the PDO error mode to exception
++        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
++        $stmt = $conn->prepare($sql);
++        $stmt->execute();
++        $result = $stmt->fetchAll()[0];
++        var_dump($result);
++        if($result["passwort"]==$pw){
++            $_SESSION["aktiveUser"][]=$user;
++            $_SESSION["UID"] = $result["ID"];
++            echo("<script>location.href='/chat.php';</script>");
++        }else{
++            echo("<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>");
++        }
++    } catch(PDOException $e) {
++        echo "Connection failed: " . $e->getMessage();
++    }
++}
++?>
++<div class="contentLimiter">
++    <?php
++        $post = new post("Hallo", "id");
++        $post -> render();
++    ?>
++</div>
++</body>
++</html>
+\ No newline at end of file
