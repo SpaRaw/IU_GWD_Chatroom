@@ -1,4 +1,4 @@
-<?php
+a<?php
     session_start();
 ?>
 <!doctype html>
@@ -32,7 +32,7 @@
             if($result["passwort"]==$pw){
                 $_SESSION["aktiveUser"][]=$user;
                 $_SESSION["UID"] = $result["ID"];
-                echo("<script>location.href='/test.php';</script>");
+                echo("<script>location.href='/chat.php';</script>");
             }else{
                 echo("<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>");
             }
@@ -42,7 +42,6 @@
     }
 
 ?>
-<h1>Hallo</h1>
 <div class="contentLimiter">
     <header>
         <img src="icon/icon.svg">
