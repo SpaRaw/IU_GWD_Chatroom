@@ -1,4 +1,4 @@
-a<?php
+<?php
     session_start();
 ?>
 <!doctype html>
@@ -28,7 +28,6 @@ a<?php
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $result = $stmt->fetchAll()[0];
-            var_dump($result);
             if($result["passwort"]==$pw){
                 $_SESSION["aktiveUser"][]=$user;
                 $_SESSION["UID"] = $result["ID"];

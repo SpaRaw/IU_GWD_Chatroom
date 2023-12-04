@@ -12,41 +12,26 @@
     <title>CatRoom</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="icon" href="./icon/icon.svg">
+    <script src="JS/handlePost.js" type="module"></script>
 </head>
 <body>
 <?php
-if(isset($_POST["pw"], $_POST["user"])){
-    $pw = hash('sha256', $_POST["pw"]);
-    $user = $_POST["user"];
-    $servername = "sql";
-    $username = "root";
-    $password = "zitrone";
-    $sql = "SELECT * FROM user WHERE user_name='".$user."'";
-    try {
-        $conn = new PDO("mysql:host=$servername;dbname=user", $username, $password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $result = $stmt->fetchAll()[0];
-        var_dump($result);
-        if($result["passwort"]==$pw){
-            $_SESSION["aktiveUser"][]=$user;
-            $_SESSION["UID"] = $result["ID"];
-            echo("<script>location.href='/chat.php';</script>");
-        }else{
-            echo("<h2 class='err'> Nutzer Daten stimmen nicht Überein </h2>");
-        }
-    } catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+    if(empty($_SESSION["UID"])){
+        $_SESSION["UID"] = 2;
     }
-}
 ?>
 <div class="contentLimiter">
-    <?php
-        $post = new post("Hallo", "id");
-        $post -> render();
-    ?>
+    <div id="posts">
+
+    </div>
+    <div>
+        <form method="post" action="/api.php">
+            <textarea name="content">
+            </textarea>
+            <?php echo("<input type='hidden' name='user' value='".$_SESSION["UID"]."' />")?>
+            <button>Post</button>
+        </form>
+    </div>
 </div>
 </body>
 </html>

@@ -13,7 +13,8 @@ class post
     function render(){
         $content = "
             <div>
-            
+            <h2>".$this->postID."</h2>
+            <p>".$this ->postContent."</p>
             </div>
         ";
 
