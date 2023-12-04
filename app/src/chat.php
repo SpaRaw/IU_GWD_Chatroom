@@ -12,7 +12,7 @@
     <title>CatRoom</title>
     <link rel="stylesheet" href="./style/style.css">
     <link rel="icon" href="./icon/icon.svg">
-    <script src="JS/handlePost.js" type="module"></script>
+    <script src="./JS/handlePost.js" type="module"></script>
 </head>
 <body>
 <?php
@@ -24,12 +24,12 @@
     <div id="posts">
 
     </div>
-    <div>
+    <div id="input">
         <form method="post" action="/api.php">
             <textarea name="content">
             </textarea>
             <?php echo("<input type='hidden' name='user' value='".$_SESSION["UID"]."' />")?>
-            <button>Post</button>
+            <button id="post">Post</button>
         </form>
     </div>
 </div>

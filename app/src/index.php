@@ -53,7 +53,10 @@
             <input type="submit" value="Einloggen">
         </form>
     </div>
-    <a href="registrierung.php">Registrieren</a>
+    <div>
+        <a href="registrierung.php">Registrieren</a>
+        <a href="/chat.php">Check it out</a>
+    </div>
 </div>
 </body>
 </html>
